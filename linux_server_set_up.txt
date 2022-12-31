@@ -1,0 +1,96 @@
+45.79.28.69
+ssh root@<server ip>
+-- this will connect to the server via ssh
+
+apt update && apt upgrade
+-- updates and upgrades software on server 
+
+hostnamectl set-hostname flask-server
+-- sets the hostname of the server
+
+nano /etc/hosts
+-- add the ip address and host name to this file
+
+adduser <username>
+adduser <username> sudo
+-- it is best practice to not use the root user 
+-- instead create a user and give them sudo privilege 
+
+exit
+ssh <username>@<server ip>
+-- logout as root user and login as the user that was created
+-- again this is a best practice
+
+mkdir .ssh
+-- create a .ssh dir on the server
+-- then on your local machine
+ssh-keygen -b 4096
+-- this generates ssh keys
+scp ~/.ssh/id_rsa.pub <username>@<server ip>:~/.ssh/authorized_keys
+-- this securely copies the public ssh keys that was created on your machine
+-- to the server which will allow you to ssh into the server without password
+-- this is a more secure way to access the server
+
+sudo chmod 700 ~/.ssh/
+-- run this on the server
+-- sets the owner of the dir to have read, write, and execute permission
+sudo chmod 600 ~/.ssh/*
+-- sets read. write permissions on the files in the dir
+
+sudo nano /etc/ssh/sshd_config
+-- set PermitRootLogin to no
+-- set PaawordAuthentication to no
+sudo systemctl restart ssh
+-- now that we can login with user using ssh keys
+-- we can not allow root login or user login with password
+-- this makes the server secure
+
+sudo apt install ufw
+-- installs uncomplicated firewall
+sudo ufw default allow outgoing
+-- allow outgoing traffic
+sudo ufw default deny incoming
+-- deny incoming traffic
+sudo ufw allow ssh
+-- allows ssh 
+sudo ufw allow 5000
+-- allows traffic on port 5000
+sudo ufw enable
+-- enables the firewall
+sudo ufw status
+-- check the status
+
+-- to install docker on ubuntu follow these instructions
+https://docs.docker.com/engine/install/ubuntu/
+
+sudo docker login
+-- login to docker
+sudo docker pull 
+-- pull the image
+sudo docker images
+-- check that image was pulled onto the machine
+
+mkdir app
+scp .env <user>@<server ip>:/home/<user>/app/.env
+-- move the .env file to the server
+
+mkdir data
+mkdir data/profile_pics
+mkdir data/database
+scp default.jpg <username>@<server ip>:/home/<username>/app/data/profile_pics/defualt.jpg
+-- create the dir for profile pics and database
+-- copy the defualt image to the dir
+-- we will mount volumes onto the container to use these dir
+
+cd app
+sudo docker run --rm -it --entrypoint bash ncoy/flask-blog:0.1
+-- this will start a temporary container 
+-- it will not start the flask dev server
+-- you can make sure everything looks good
+
+sudo docker run --env-file .env -p5000:5000 \
+-v "/home/ncoy/app/data/profile_pics:/usr/src/app/app/flask_blog/static/profile_pics" \
+-v "/home/ncoy/app/data/database:/usr/src/app/app/instance"   \
+ncoy/flask-blog:0.1
+-- starts a docker container and mounts volumes for both the profile pics and the sql lite database
+sudo docker ps 
