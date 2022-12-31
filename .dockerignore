@@ -6,6 +6,7 @@ README.md
 LICENSE
 .vscode
 app/instance/
+app/__pycache__
 __pycache__
 *.pyc
 *.pyo

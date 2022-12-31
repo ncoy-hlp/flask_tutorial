@@ -15,4 +15,4 @@ WORKDIR /usr/src/app/app
 
 EXPOSE 5000
 
-CMD ["python", "run.py"]
+CMD ["sh", "start.sh"]
