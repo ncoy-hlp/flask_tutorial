@@ -1,0 +1,21 @@
+ docker images
+ -- see images
+
+ docker ps
+ -- see running containers
+
+ docker ps -a 
+ -- see all containers including stoped ones
+
+
+ docker build -t flask-blog .
+ -- build docker image named flask-blog
+
+docker tag flask-blog:latest ncoy/flask-blog:<version number>
+-- tag the local image wiht my docker hub repo name
+
+docker push ncoy/flask-blog:<version number>
+-- push the image to my repo
+
+docker pull ncoy/flask-blog:<version number>
+-- pulls the docker image from repo
