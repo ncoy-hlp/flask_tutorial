@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    image: ncoy/flask-blog:latest
+    command: sh start.sh
+    volumes:
+      - ${PWD}/app/flask_blog/static/profile_pics:/usr/src/app/app/flask_blog/static/profile_pics
+      - ${PWD}/app/instance:/usr/src/app/app/instance
+    ports:
+      - 5000:5000
+    env_file:
+      - .env
+  nginx:
+    build: ./nginx
+    image: ncoy/flask_tutorial-nginx:latest
+    ports:
+      - 1337:80
+    depends_on:
+      - web

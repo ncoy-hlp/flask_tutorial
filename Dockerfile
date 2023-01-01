@@ -15,5 +15,3 @@ RUN pipenv install --system --deploy --ignore-pipfile
 WORKDIR /usr/src/app/app
 
 EXPOSE 5000
-
-CMD ["sh", "start.sh"]

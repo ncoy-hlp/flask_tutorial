@@ -1,3 +1,3 @@
 #!/bin/bash
 flask db upgrade
-flask run --host 0.0.0.0
+gunicorn -w 3 --bind 0.0.0.0:5000 app:app
