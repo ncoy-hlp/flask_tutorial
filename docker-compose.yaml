@@ -1,21 +1,30 @@
 version: '3.8'
 
 services:
-  web:
-    build: .
+  flask:
+    build: ./app
+    container_name: flask
     image: ncoy/flask-blog:latest
     command: sh start.sh
     volumes:
       - ${PWD}/app/flask_blog/static/profile_pics:/usr/src/app/app/flask_blog/static/profile_pics
       - ${PWD}/app/instance:/usr/src/app/app/instance
-    expose:
-      - 5000
+    networks:
+      my-network:
+        aliases:
+          - flask-app
     env_file:
       - .env
   nginx:
     build: ./nginx
     image: ncoy/flask_tutorial-nginx:latest
+    container_name: nginx
     ports:
-      - 1337:80
+      - 80:80
+    networks:
+      - my-network
     depends_on:
-      - web
+      - flask
+
+networks:
+  my-networks:

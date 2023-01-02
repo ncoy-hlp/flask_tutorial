@@ -5,8 +5,7 @@ docker-compose*
 README.md
 LICENSE
 .vscode
-app/instance/
-app/__pycache__
+instance/
 __pycache__
 *.pyc
 *.pyo

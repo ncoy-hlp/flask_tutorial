@@ -13,5 +13,3 @@ RUN pip3 install pipenv
 RUN pipenv install --system --deploy --ignore-pipfile
 
 WORKDIR /usr/src/app/app
-
-EXPOSE 5000
