@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for announcement in announcements.items %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ url_for('static', filename='announcement_image/flask.png') }}">
+          <div class="media-body">
+            <div class="article-metadata">
+                <small class="text-muted">{{ announcement.author.username }}</small>
+              <small class="text-muted">{{ announcement.date_posted.strftime("%Y-%m-%d") }}</small>
+            </div>
+            {% if current_user.email == 'nickcoy615@gmail.com' %}
+              <h2><a class="article-title" href="{{ url_for('posts.post', post_id = announcement.id) }}">{{ announcement.title }}</a></h2>
+            {% else %}
+              <h2><a class="article-title">{{ announcement.title }}</a></h2>
+            {% endif %}
+            <p class="article-content">{{ announcement.content }}</p>
+          </div>
+        </article>
+    {% endfor %}
+    {% for page_num in announcements.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if page_num %}
+        {% if announcements.page == page_num %}
+          <a class="btn btn-info mb-4" href="{{ url_for('main.announcements', page=page_num)}}">{{ page_num }}</a>
+        {% else %}
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('main.announcements', page=page_num)}}">{{ page_num }}</a>
+        {% endif %}
+      {% else %}
+      {% endif %}
+    {% endfor %}
+{% endblock content %}
