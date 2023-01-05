@@ -201,6 +201,10 @@ Thumbs.db
 # csv files
 .csv
 
+# profile pics
+app/flask_blog/static/profile_pics/*
+! app/flask_blog/static/profile_pics/default.jpg
+
 #cert bot data
 data/
 # End of https://www.toptal.com/developers/gitignore/api/python,jupyternotebooks,macos
