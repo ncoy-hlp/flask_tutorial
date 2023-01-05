@@ -200,4 +200,7 @@ Thumbs.db
 
 # csv files
 .csv
+
+#cert bot data
+data/
 # End of https://www.toptal.com/developers/gitignore/api/python,jupyternotebooks,macos
