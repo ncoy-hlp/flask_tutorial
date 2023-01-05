@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  flask:
+    build: ./app
+    container_name: flask
+    image: ncoy/flask-blog:latest
+    command: sh start.sh
+    volumes:
+      - ./app/flask_blog/static/profile_pics:/usr/src/app/app/flask_blog/static/profile_pics
+      - ./app/instance:/usr/src/app/app/instance
+    networks:
+      my-network:
+        aliases:
+          - flask-app
+    env_file:
+      - .env
+  nginx:
+    image: nginx:1.23-alpine
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - my-network
+    restart: always
+    volumes:
+      - ./nginx/nginx_dev/:/etc/nginx/conf.d/
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    depends_on:
+      - flask
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+
+networks:
+  my-network:

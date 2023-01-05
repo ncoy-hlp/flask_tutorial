@@ -7,8 +7,8 @@ services:
     image: ncoy/flask-blog:latest
     command: sh start.sh
     volumes:
-      - ${PWD}/app/flask_blog/static/profile_pics:/usr/src/app/app/flask_blog/static/profile_pics
-      - ${PWD}/app/instance:/usr/src/app/app/instance
+      - ./app/flask_blog/static/profile_pics:/usr/src/app/app/flask_blog/static/profile_pics
+      - ./app/instance:/usr/src/app/app/instance
     networks:
       my-network:
         aliases:
@@ -16,11 +16,14 @@ services:
     env_file:
       - .env
   nginx:
-    build: ./nginx
-    image: ncoy/flask_tutorial-nginx:latest
+    image: nginx:1.23-alpine
     container_name: nginx
     ports:
       - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/nginx_dev/:/etc/nginx/conf.d/
+      - ./app/flask_blog/static/:/home/app/web/project/static
     networks:
       - my-network
     depends_on:
