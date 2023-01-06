@@ -26,7 +26,7 @@ services:
       - my-network
     restart: always
     volumes:
-      - ../.././nginx/nginx_dev/:/etc/nginx/conf.d/:ro
+      - ../.././nginx/nginx_prod/:/etc/nginx/conf.d/:ro
       - ../.././app/flask_blog/static/:/home/app/web/project/static
       - ../.././letsencrypt/:/letsencrypt
       - ../.././letsencrypt/certs/:/etc/letsencrypt
