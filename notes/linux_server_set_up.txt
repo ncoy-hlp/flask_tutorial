@@ -97,3 +97,12 @@ sudo docker ps
 sudo ufw allow http/tcp
 sudo ufw disallow 5000
 sudo apt install supervisor
+
+-- this starts the cerbot container needed to generate certificates
+-- for ssl/tls
+-- folow this https://www.youtube.com/watch?app=desktop&v=jrR_WfgmWEw
+-- https://github.com/marcel-dempers/docker-development-youtube-series/tree/master/security/letsencrypt/introduction
+docker run -it --rm --name cerbot 
+-v ${PWD}/letsencrypt/:/letsencrypt 
+-v ${PWD}/letsencrypt/certs/:/etc/letsencrypt 
+certbot bash
