@@ -2,13 +2,14 @@ version: '3.8'
 
 services:
   flask:
-    build: ./app
+    build: 
+      context: ../../.
     container_name: flask
     image: ncoy/flask-blog:latest
     command: sh start.sh
     volumes:
-      - ./app/flask_blog/static/profile_pics:/usr/src/app/app/flask_blog/static/profile_pics
-      - ./app/instance:/usr/src/app/app/instance
+      - ../.././app/flask_blog/static/profile_pics:/usr/src/app/app/flask_blog/static/profile_pics
+      - ../.././app/instance:/usr/src/app/app/instance
     networks:
       my-network:
         aliases:
@@ -25,17 +26,17 @@ services:
       - my-network
     restart: always
     volumes:
-      - ./nginx/nginx_dev/:/etc/nginx/conf.d/:ro
-      - ./app/flask_blog/static/:/home/app/web/project/static
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
+      - ../.././nginx/nginx_prod/:/etc/nginx/conf.d/:ro
+      - ../.././app/flask_blog/static/:/home/app/web/project/static
+      - ../.././letsencrypt/:/letsencrypt
+      - ../.././letsencrypt/certs/:/etc/letsencrypt
     depends_on:
       - flask
   certbot:
     image: certbot/certbot
     volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
+      - ../.././letsencrypt/:/letsencrypt
+      - ../.././letsencrypt/certs/:/etc/letsencrypt
 
 networks:
   my-network:
