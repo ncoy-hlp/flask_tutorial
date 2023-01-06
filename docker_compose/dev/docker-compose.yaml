@@ -24,6 +24,8 @@ services:
     volumes:
       - ../.././nginx/nginx_dev/:/etc/nginx/conf.d/:ro
       - ../.././app/flask_blog/static/:/home/app/web/project/static
+      - ../.././letsencrypt/:/letsencrypt
+      - ../.././letsencrypt/certs/:/etc/letsencrypt
     networks:
       - my-network
     depends_on:
