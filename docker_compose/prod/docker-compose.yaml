@@ -15,7 +15,7 @@ services:
         aliases:
           - flask-app
     env_file:
-      - .env
+      - ../../.env
   nginx:
     image: nginx:1.23-alpine
     container_name: nginx
