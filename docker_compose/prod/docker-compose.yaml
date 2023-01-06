@@ -32,11 +32,11 @@ services:
       - ../.././letsencrypt/certs/:/etc/letsencrypt
     depends_on:
       - flask
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ../.././letsencrypt/:/letsencrypt
-      - ../.././letsencrypt/certs/:/etc/letsencrypt
+  # certbot:
+  #   image: certbot/certbot
+  #   volumes:
+  #     - ../.././letsencrypt/:/letsencrypt
+  #     - ../.././letsencrypt/certs/:/etc/letsencrypt
 
 networks:
   my-network:
