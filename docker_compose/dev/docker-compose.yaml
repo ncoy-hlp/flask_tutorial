@@ -2,19 +2,19 @@ version: '3.8'
 
 services:
   flask:
-    build: ./app
+    build: ../../.
     container_name: flask
     image: ncoy/flask-blog:latest
     command: sh start.sh
     volumes:
-      - ./app/flask_blog/static/profile_pics:/usr/src/app/app/flask_blog/static/profile_pics
-      - ./app/instance:/usr/src/app/app/instance
+      - ../.././app/flask_blog/static/profile_pics:/usr/src/app/app/flask_blog/static/profile_pics
+      - ../.././app/instance:/usr/src/app/app/instance
     networks:
       my-network:
         aliases:
           - flask-app
     env_file:
-      - .env
+      - ../../.env
   nginx:
     image: nginx:1.23-alpine
     container_name: nginx
@@ -22,8 +22,8 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./nginx/nginx_dev/:/etc/nginx/conf.d/:ro
-      - ./app/flask_blog/static/:/home/app/web/project/static
+      - ../.././nginx/nginx_dev/:/etc/nginx/conf.d/:ro
+      - ../.././app/flask_blog/static/:/home/app/web/project/static
     networks:
       - my-network
     depends_on:
