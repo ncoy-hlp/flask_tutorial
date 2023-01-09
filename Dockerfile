@@ -1,6 +1,9 @@
 FROM python:3.10
 
 RUN apt-get update && apt-get -y upgrade
+RUN apt-get install -y netcat
+RUN apt-get install -y pgloader
+RUN apt-get install nano
 RUN apt-get -y install python3-pip
 
 WORKDIR /usr/src/app
