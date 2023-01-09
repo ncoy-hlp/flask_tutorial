@@ -205,6 +205,12 @@ Thumbs.db
 app/flask_blog/static/profile_pics/*
 ! app/flask_blog/static/profile_pics/default.jpg
 
+#postgres
+postgres_data/
+
+#pgloader
+pgloader/
+
 #cert bot data
 letsencrypt/
 # End of https://www.toptal.com/developers/gitignore/api/python,jupyternotebooks,macos
