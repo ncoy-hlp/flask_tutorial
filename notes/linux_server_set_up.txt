@@ -106,3 +106,7 @@ docker run -it --rm --name cerbot
 -v ${PWD}/letsencrypt/:/letsencrypt 
 -v ${PWD}/letsencrypt/certs/:/etc/letsencrypt 
 certbot bash
+
+make sure to add the web_root path 
+to letsencrypt/cert/renewal 
+this is the full path to the letsencrypt directory
