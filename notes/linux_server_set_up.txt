@@ -109,4 +109,5 @@ certbot bash
 
 make sure to add the web_root path 
 to letsencrypt/cert/renewal 
-this is the full path to the letsencrypt directory
+since we are running certbot in a docker container and mounting the letsencrypt
+directory the web_root path is /letsencrypt
