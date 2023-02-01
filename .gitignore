@@ -211,6 +211,9 @@ postgres_data/
 #pgloader
 pgloader/
 
+#crontab logs
+cron_logs/
+
 #cert bot data
 letsencrypt/
 # End of https://www.toptal.com/developers/gitignore/api/python,jupyternotebooks,macos
