@@ -111,3 +111,11 @@ make sure to add the web_root path
 to letsencrypt/cert/renewal 
 since we are running certbot in a docker container and mounting the letsencrypt
 directory the web_root path is /letsencrypt
+
+# crontab for running shell script to execute certbot renewal
+# sets the crontab editor to nano
+export EDITOR=/usr/bin/nano
+# edit crontab jobs
+crontab -e
+# sets cronjob to run at 1 am daily and output logs to cron_log directory
+0 1 * * * /bin/bash /home/ncoy/app/flask_tutorial/certbot_renew.sh 1> /home/ncoy/app/flask_tutorial/cron_logs/log.txt 2> /home/ncoy/app/flask_tutorial/cron_logs/err.txt
